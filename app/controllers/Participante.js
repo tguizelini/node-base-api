@@ -14,7 +14,6 @@ const Participante = app => {
 
   app.get('/participantes/sortear', async (req, res) => {
     const sorteado = await service.next()
-    console.log('sorteado -> ', sorteado)
     res.status(200).json(sorteado)
   })
 

@@ -13,12 +13,12 @@ module.exports = app => () => {
     where: { id: id }
   })
   
-  const save = obj => {
-    if (!obj) return 403
+  const save = async obj => {
+    if (!obj) return false
     
-    Model.create(obj)
+    await Model.create(obj)
 
-    return 200
+    return true
   }
   
   const update = () => false
