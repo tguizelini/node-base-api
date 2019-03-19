@@ -5,10 +5,6 @@ module.exports = app => () => {
     order: [ ['id', 'ASC'] ]
   })
 
-  const next = async () => await Model.findOne({
-    order: [ ['sorteios', 'ASC'] ]
-  })
-
   const find = async id => await Model.findAll({
     where: { id: id }
   })
@@ -23,14 +19,13 @@ module.exports = app => () => {
   
   const update = () => false
   
-  const del = () => false
+  const deleteById = () => false
   
   return {
     list,
     find,
-    next,
     save,
     update,
-    delete: del
+    deleteById
   }
 }

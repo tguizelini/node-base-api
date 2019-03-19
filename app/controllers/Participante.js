@@ -1,23 +1,18 @@
-const Participante = app => {
+module.exports = app => () => {
   const service = app.services.Participante()
 
-  app.get('/participantes', async (req, res) => {
+  const list = async (req, res) => {
     const participantes = await service.list()
     res.status(200).json(participantes)
-  })
+  }
 
-  app.get('/participantes/id/:id', async (req, res) => {
+  const find = async (req, res) => {
     const id = req.params.id || ''
     const participantes = await service.find(id)
     res.status(200).json(participantes)
-  })
+  }
 
-  app.get('/participantes/sortear', async (req, res) => {
-    const sorteado = await service.next()
-    res.status(200).json(sorteado)
-  })
-
-  app.post('/participantes', (req, res) => {
+  const save = async (req, res) => {
     if (!req.body.nome) return res.status(400).json({ message: 'Obrigatório.nome' })
 
     const model = app.models.Participante()
@@ -27,23 +22,29 @@ const Participante = app => {
     const ret = service.save(model)
 
     if (!ret) {
-      res.status(400).json({ message: 'Payload inválido' })
+      res.status(403).json({ message: 'Payload inválido' })
     } else {
       res.status(200).json({ message: 'Participante criado com sucesso' })
     }
-  })
+  }
 
-  app.put('/participantes', (req, res) => {
+  const update = async (req, res) => {
     const id = req.params.id || ''
     service.update(id)
-    res.status(200).json()
-  })
+    res.status(200).json({ message: 'Participante atualizado' })
+  }
 
-  app.delete('/participantes/:id', (req, res) => {
+  const deleteById = (req, res) => {
     const id = req.params.id || ''
-    service.delete(id)
-    res.status(200).json()
-  })
-}
+    service.deleteById(id)
+    res.status(200).json({ message: 'Participante excluído' })
+  }
 
-module.exports = Participante
+  return {
+    list,
+    find,
+    save,
+    update,
+    deleteById
+  }
+}

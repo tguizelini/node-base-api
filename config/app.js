@@ -17,6 +17,7 @@ module.exports = () => {
     .include('services')
     .include('models')
     .include('controllers')
+    .include('routes')
     .into(app)
 
   app.sequelize
