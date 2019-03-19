@@ -22,12 +22,12 @@ module.exports = () => {
 
   app.sequelize
     .authenticate()
-    .then(() => console.log('Database: Connection has been established successfully.'))
+    .then(() => console.log('DATABASE: Connection has been established successfully.'))
     .catch(err => console.error('Database: Unable to connect to the database:', err))
 
   app.sequelize
     .sync({ force: false })
-    .then(() => console.log(`Database: Tables created!`))
+    .then(() => console.log(`DATABASE: Tables created!`))
 
   return app
 }
