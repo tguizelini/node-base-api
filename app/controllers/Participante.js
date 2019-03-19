@@ -2,42 +2,79 @@ module.exports = app => () => {
   const service = app.services.Participante()
 
   const list = async (req, res) => {
-    const participantes = await service.list()
-    res.status(200).json(participantes)
+    const response = app.models.Response()
+
+    const ret = await service.list()
+    res.status(ret.status).json(ret)
   }
 
   const find = async (req, res) => {
+    const response = app.models.Response()
     const id = req.params.id || ''
-    const participantes = await service.find(id)
-    res.status(200).json(participantes)
+
+    if (id == '') {
+      response.status = 400
+      response.message = 'O campo ID é obrigatório'
+      response.data = req.body
+
+      res.status(response.status).json(response)
+    }
+    
+    const ret = await service.find(id)
+    res.status(ret.status).json(ret)
   }
 
   const save = async (req, res) => {
-    if (!req.body.nome) return res.status(400).json({ message: 'Obrigatório.nome' })
+    const response = app.models.Response()
+
+    if (!req.body.nome) {
+      response.status = 400
+      response.message = 'O campo NOME é obrigatório'
+      response.data = req.body
+
+      res.status(response.status).json(response)
+    }
 
     const model = app.models.Participante()
     model.nome = req.body.nome
     model.sorteios = req.body.sorteios || 0
 
-    const ret = service.save(model)
+    const ret = await service.save(model)
 
-    if (!ret) {
-      res.status(403).json({ message: 'Payload inválido' })
-    } else {
-      res.status(200).json({ message: 'Participante criado com sucesso' })
-    }
+    res.status(ret.status).json(ret)
   }
 
   const update = async (req, res) => {
+    const response = app.models.Response()
     const id = req.params.id || ''
-    service.update(id)
-    res.status(200).json({ message: 'Participante atualizado' })
+
+    if (id == '') {
+      response.status = 400
+      response.message = 'O campo ID é obrigatório'
+      response.data = req.body
+
+      res.status(response.status).json(response)
+    }
+    
+    const ret = await service.update(id)
+    res.status(ret.status).json(ret)
   }
 
-  const deleteById = (req, res) => {
+  const deleteById = async (req, res) => {
+    const response = app.models.Response()
+
     const id = req.params.id || ''
-    service.deleteById(id)
-    res.status(200).json({ message: 'Participante excluído' })
+
+    if (id == '') {
+      response.status = 400
+      response.message = 'O campo nome ID é obrigatório'
+      response.data = req.body
+
+      res.status(response.status).json(response)
+    }
+
+    const ret = await service.deleteById(id)
+    res.status(ret.status).json(ret)
   }
 
   return {
