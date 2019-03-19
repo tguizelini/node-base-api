@@ -2,39 +2,38 @@ module.exports = app => () => {
   const ParticipanteEntity = app.entities.Participante()
   const SorteioEntity = app.entities.Sorteio()
 
-  const list = async () => {
-    const response = app.models.Response()
+  const response = app.models.Response()
 
-    const sorteios = await SorteioEntity.findAll({
+  const list = async () => {
+    await SorteioEntity.findAll({
       order: [ ['id', 'ASC'] ]
+    })
+    .then(res => {
+      response.status = 200
+      response.message = 'Sucesso'
+      response.data = res
     })
     .catch(err => {
       response.status = 500
       response.message = 'SorteioService:: Erro buscar lista de sorteios'
       response.data = err
-
-      return response
     })
-
-    response.status = 200
-    response.message = 'Sucesso'
-    response.data = sorteios
 
     return response
   }
 
   const sortear = async () => {
-    const response = app.models.Response()
-
-    const sorteado = await ParticipanteEntity.findOne({
+    //sorteio participante
+    let sorteado = null 
+    
+    await ParticipanteEntity.findOne({
       order: [ ['sorteios', 'ASC'] ]
     })
+    .then(res => sorteado = res)
     .catch(err => {
       response.status = 500
       response.message = 'SorteioService:: Erro ao buscar participante'
       response.data = err
-
-      return response
     })
 
     if (sorteado == null) {
@@ -43,26 +42,36 @@ module.exports = app => () => {
       response.message = 'SorteioService:: Não foram encontrados participantes para sortear'
       response.data = null
 
-    } else {
+      return response
+    } 
 
-      await ParticipanteEntity.update(
-        { sorteios: sorteado.sorteios + 1 },
-        { where: { id: sorteado.id } }
-      )
-      .then(res => {
+    //atualizo a quantidade de sorteios do participante sorteado
+    await ParticipanteEntity.update(
+      { sorteios: sorteado.sorteios + 1 },
+      { where: { id: sorteado.id } }
+    )
+    .then(async res => {
+      const novoSorteio = app.models.Sorteio()
+      novoSorteio.idParticipante = sorteado.id
+
+      //insiro o novo sorteio
+      await SorteioEntity.create(novoSorteio)
+      .then(resp => {
         response.status = 200
         response.message = 'Sucesso'
-        response.data = sorteado
+        response.data = resp
       })
       .catch(err => {
         response.status = 500
-        response.message = 'SorteioService:: Erro ao atualizar número de sorteios do participante'
+        response.message = 'SorteioService:: Erro ao inserrir novo sorteio'
         response.data = err
-
-        return response
       })
-
-    }
+    })
+    .catch(err => {
+      response.status = 500
+      response.message = 'SorteioService:: Erro ao atualizar número de sorteios do participante'
+      response.data = err
+    })
 
     return response
   }

@@ -1,51 +1,45 @@
 module.exports = app => () => {
   const ParticipanteEntity = app.entities.Participante()
 
-  const list = async () => {
-    const response = app.models.Response()
+  const response = app.models.Response()
 
-    const participantes = await ParticipanteEntity.findAll({
+  const list = async () => {
+    await ParticipanteEntity.findAll({
       order: [ ['id', 'ASC'] ]
+    })
+    .then(res => {
+      response.status = 200
+      response.message = 'Sucesso'
+      response.data = res
     })
     .catch(err => {
       response.status = 500
       response.message = 'ParticipanteService:: Erro buscar lista de participantes'
       response.data = err
-
-      return response
     })
-
-    response.status = 200
-    response.message = 'Sucesso'
-    response.data = participantes
 
     return response
   }
 
   const find = async id => {
-    const response = app.models.Response()
-
-    const participante = await ParticipanteEntity.findAll({
+    await ParticipanteEntity.findAll({
       where: { id: id }
+    })
+    .then(res => {
+      response.status = 200
+      response.message = 'Sucesso'
+      response.data = res
     })
     .catch(err => {
       response.status = 500
       response.message = 'ParticipanteService:: Erro buscar buscar participante por ID'
       response.data = err
-
-      return response
     })
-
-    response.status = 200
-    response.message = 'Sucesso'
-    response.data = participante
 
     return response
   }
   
   const save = async obj => {
-    const response = app.models.Response()
-
     if (!obj) {
       response.status = 500
       response.message = 'ParticipanteService:: Erro buscar buscar participante por ID'
@@ -54,20 +48,38 @@ module.exports = app => () => {
       return response
     }
 
-    await ParticipanteEntity.create(obj).catch(err => {
-      response.status = 500
-      response.message = 'ParticipanteService:: Erro buscar buscar participante por ID'
-      response.data = err
-
-      return response
+    await ParticipanteEntity.create(obj)
+    .then(res => {
+      response.status = 200
+      response.message = 'Sucesso'
+      response.data = res
     })
-    
-    response.status = 200
-    response.message = 'Sucesso'
-    response.data = null
+    .catch(err => {
+      response.status = 500
+      response.message = 'ParticipanteService:: Erro ao criar novo participante'
+      response.data = err
+    })
+
+    return response
   }
   
-  const deleteById = () => false
+  const deleteById = async id => {
+    await ParticipanteEntity.destroy({ 
+      where: { id: id }
+    })
+    .then(res => {
+      cresponse.status = 200
+      response.message = 'Sucesso'
+      response.data = res
+    })
+    .catch(err => {
+      response.status = 500
+      response.message = 'ParticipanteService:: Erro ao excluir participante'
+      response.data = err
+    })
+
+    return response
+  }
   
   return {
     list,

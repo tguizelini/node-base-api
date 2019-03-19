@@ -44,22 +44,6 @@ module.exports = app => () => {
     res.status(ret.status).json(ret)
   }
 
-  const update = async (req, res) => {
-    const response = app.models.Response()
-    const id = req.params.id || ''
-
-    if (id == '') {
-      response.status = 400
-      response.message = 'O campo ID é obrigatório'
-      response.data = req.body
-
-      res.status(response.status).json(response)
-    }
-    
-    const ret = await service.update(id)
-    res.status(ret.status).json(ret)
-  }
-
   const deleteById = async (req, res) => {
     const response = app.models.Response()
 
@@ -81,7 +65,6 @@ module.exports = app => () => {
     list,
     find,
     save,
-    update,
     deleteById
   }
 }

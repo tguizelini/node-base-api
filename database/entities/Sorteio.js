@@ -9,7 +9,7 @@ module.exports = app => () => {
       autoIncrement: true
     },
     data: {
-      type: Sequelize.DATE,
+      type: Sequelize.STRING,
       allowNull: false
     },
     idParticipante: {
