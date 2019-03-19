@@ -1,11 +1,11 @@
 module.exports = {
-  username: 'root',
-  password: 'root',
-  database: 'db_7cake',
+  username: 'joeky497_tiago7',
+  password: '1234qwerty',
+  database: 'joeky497_7comm_bolo',
   options: {
-    host: 'localhost',
+    host: '192.185.211.194',
     dialect: 'mysql',
-    port: 8889,
+    port: 3306,
     pool: {
       max: 5,
       min: 0,
