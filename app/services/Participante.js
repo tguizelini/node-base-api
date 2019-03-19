@@ -1,18 +1,18 @@
 module.exports = app => () => {
-  const Model = app.schemas.Participante()
+  const ParticipanteEntity = app.entities.Participante()
 
-  const list = async () => await Model.findAll({
+  const list = async () => await ParticipanteEntity.findAll({
     order: [ ['id', 'ASC'] ]
   })
 
-  const find = async id => await Model.findAll({
+  const find = async id => await ParticipanteEntity.findAll({
     where: { id: id }
   })
   
   const save = async obj => {
     if (!obj) return false
     
-    await Model.create(obj)
+    await ParticipanteEntity.create(obj)
 
     return true
   }

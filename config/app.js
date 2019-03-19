@@ -10,7 +10,7 @@ module.exports = () => {
 
   consign({ cwd: 'database' })
     .include('sequelize.js')
-    .include('schemas')
+    .include('entities')
     .into(app)
 
   consign({ cwd: 'app' })

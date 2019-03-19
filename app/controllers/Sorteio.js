@@ -2,13 +2,13 @@ module.exports = app => () => {
   const service = app.services.Sorteio()
 
   const list = async (req, res) => {
-    const sorteios = await service.list()
-    res.status(200).json(sorteios)
+    const ret = await service.list()
+    res.status(ret.status).json(ret)
   }
 
   const sortear = async (req, res) => {
-    const sorteado = await service.sortear()
-    res.status(200).json(sorteado)
+    const ret = await service.sortear()
+    res.status(ret.status).json(ret)
   }
 
   return {
