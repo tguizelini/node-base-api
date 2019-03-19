@@ -10,7 +10,8 @@ const sequelize = new Sequelize(
     port: config.options.port,
     dialect: config.options.dialect,
     pool: config.options.pool,
-    define: config.options.define
+    define: config.options.define,
+    logging: false
   }
 )
 

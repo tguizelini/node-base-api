@@ -68,7 +68,7 @@ module.exports = app => () => {
       where: { id: id }
     })
     .then(res => {
-      cresponse.status = 200
+      response.status = 200
       response.message = 'Sucesso'
       response.data = res
     })
