@@ -4,5 +4,3 @@ module.exports = app => {
   app.get('/sorteios', controller.list)
   app.get('/sorteios/next', controller.sortear)
 }
-
-

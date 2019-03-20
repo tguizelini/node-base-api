@@ -12,6 +12,10 @@ module.exports = app => () => {
       type: Sequelize.STRING,
       allowNull: false
     },
+    login: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
     sorteios: {
       type: Sequelize.INTEGER,
       defaults: 0

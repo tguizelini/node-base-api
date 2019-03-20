@@ -35,8 +35,17 @@ module.exports = app => () => {
       res.status(response.status).json(response)
     }
 
+    if (!req.body.login) {
+      response.status = 400
+      response.message = 'O campo LOGIN é obrigatório'
+      response.data = req.body
+
+      res.status(response.status).json(response)
+    }
+
     const model = app.models.Participante()
     model.nome = req.body.nome
+    model.login = req.body.login
     model.sorteios = req.body.sorteios || 0
 
     const ret = await service.save(model)
