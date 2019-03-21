@@ -14,7 +14,6 @@ module.exports = app => () => {
 
       const data = []
 
-      
       if (res.length > 0) {
         res.map(i => {
 
@@ -23,9 +22,10 @@ module.exports = app => () => {
           })
           .then(res => {
             const obj = {
-              id: i.id,
-              nome: res.nome,
-              sorteios: res.sorteios
+              //id: i.id,
+              //nome: res.nome,
+              //sorteios: res.sorteios
+              res
             }
 
             data.push(obj)
@@ -39,8 +39,7 @@ module.exports = app => () => {
         })
       }
       
-
-      response.data = res
+      response.data = data
     })
     .catch(err => {
       response.status = 500
