@@ -14,6 +14,7 @@ module.exports = app => () => {
 
       const data = []
 
+      /*
       if (res.length > 0) {
         res.map(i => {
 
@@ -37,8 +38,9 @@ module.exports = app => () => {
 
         })
       }
-        
-      response.data = data
+      */
+
+      response.data = res
     })
     .catch(err => {
       response.status = 500
