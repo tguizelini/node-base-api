@@ -6,7 +6,7 @@ module.exports = app => () => {
 
   const list = async () => {
     await SorteioEntity.findAll({
-      order: [ ['id', 'ASC'] ]
+      order: [ ['id', 'DESC'] ]
     })
     .then(res => {
       response.status = 200
@@ -25,8 +25,6 @@ module.exports = app => () => {
       response.data.map(i => {
         const item = i.dataValues
         const ret = getNomeParticipante(item)
-
-        console.log('ret: ', ret)
 
         promises.push(ret)
       })
@@ -55,7 +53,6 @@ module.exports = app => () => {
   }
 
   const sortear = async () => {
-    //sorteio participante
     let sorteado = null 
     
     await ParticipanteEntity.findOne({
@@ -77,7 +74,6 @@ module.exports = app => () => {
       return response
     } 
 
-    //atualizo a quantidade de sorteios do participante sorteado
     await ParticipanteEntity.update(
       { sorteios: sorteado.sorteios + 1 },
       { where: { id: sorteado.id } }
@@ -86,7 +82,6 @@ module.exports = app => () => {
       const novoSorteio = app.models.Sorteio()
       novoSorteio.idParticipante = sorteado.id
 
-      //insiro o novo sorteio
       await SorteioEntity.create(novoSorteio)
       .then(resp => {
         response.status = 200
