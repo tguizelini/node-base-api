@@ -11,7 +11,34 @@ module.exports = app => () => {
     .then(res => {
       response.status = 200
       response.message = 'Sucesso'
-      response.data = res
+
+      const data = []
+
+      if (res.length > 0) {
+        res.map(i => {
+
+          await ParticipanteEntity.findOne({
+            where: { id: i.id }
+          })
+          .then(res => {
+            const obj = {
+              id: i.id,
+              nome: res.nome,
+              sorteios: i.sorteios
+            }
+
+            data.push(obj)
+          })
+          .catch(res => {
+            response.status = 500
+            response.message = 'SorteioService:: Erro buscar o nome dos participante'
+            response.data = err
+          })  
+
+        })
+      }
+        
+      response.data = data
     })
     .catch(err => {
       response.status = 500
