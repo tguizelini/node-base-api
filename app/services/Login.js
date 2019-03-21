@@ -3,9 +3,12 @@ module.exports = app => () => {
 
   const response = app.models.Response()
 
-  const login = async login => {
+  const login = async (login, senha) => {
     await ParticipanteEntity.findOne({
-      where: { login: login }
+      where: { 
+        login: login, 
+        senha: senha 
+      }
     })
     .then(res => {
       if (res == null) {
@@ -20,7 +23,7 @@ module.exports = app => () => {
     })
     .catch(err => {
       response.status = 500
-      response.message = 'SorteioService:: Erro buscar lista de sorteios'
+      response.message = 'LoginService:: Erro ao tentar efetuar o login'
       response.data = err
     })
 

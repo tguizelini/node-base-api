@@ -43,6 +43,14 @@ module.exports = app => () => {
       res.status(response.status).json(response)
     }
 
+    if (!req.body.senha) {
+      response.status = 400
+      response.message = 'O campo SENHA é obrigatório'
+      response.data = req.body
+
+      res.status(response.status).json(response)
+    }
+
     const model = app.models.Participante()
     model.nome = req.body.nome
     model.login = req.body.login
