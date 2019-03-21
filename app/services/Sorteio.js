@@ -15,9 +15,25 @@ module.exports = app => () => {
       const data = []
 
       if (res.length > 0) {
-        res.map(i => {
+        res.map(async i => {
 
-          
+          await ParticipanteEntity.findOne({
+            where: { id: i.idParticipante }
+          })
+          .then(res => {
+            const obj = {
+              id: i.id,
+              nome: res.nome,
+              sorteios: res.sorteios
+            }
+
+            data.push(obj)
+          })
+          .catch(res => {
+            response.status = 500
+            response.message = 'SorteioService:: Erro buscar o nome dos participante'
+            response.data = err
+          })  
 
         })
       }
