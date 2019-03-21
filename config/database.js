@@ -1,6 +1,6 @@
-const ENV = 'dev'
+const ENV = 'PROD'
 
-if (ENV == 'prod') {
+if (ENV == 'PROD') {
   module.exports = {
     username: 'joeky497_tiago7',
     password: '1234qwerty',
@@ -28,7 +28,7 @@ if (ENV == 'prod') {
   }
 }
 
-if (ENV == 'dev') {
+if (ENV == 'DEV') {
   module.exports = {
     username: 'root',
     password: 'root',
