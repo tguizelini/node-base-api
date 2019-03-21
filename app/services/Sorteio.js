@@ -14,18 +14,18 @@ module.exports = app => () => {
 
       const data = []
 
-      /*
+      
       if (res.length > 0) {
         res.map(i => {
 
           await ParticipanteEntity.findOne({
-            where: { id: i.id }
+            where: { id: i.idParticipante }
           })
           .then(res => {
             const obj = {
               id: i.id,
               nome: res.nome,
-              sorteios: i.sorteios
+              sorteios: res.sorteios
             }
 
             data.push(obj)
@@ -38,7 +38,7 @@ module.exports = app => () => {
 
         })
       }
-      */
+      
 
       response.data = res
     })
