@@ -54,6 +54,7 @@ module.exports = app => () => {
     const model = app.models.Participante()
     model.nome = req.body.nome
     model.login = req.body.login
+    model.senha = req.body.senha
     model.sorteios = req.body.sorteios || 0
 
     const ret = await service.save(model)
