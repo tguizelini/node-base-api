@@ -11,34 +11,7 @@ module.exports = app => () => {
     .then(res => {
       response.status = 200
       response.message = 'Sucesso'
-
-      const data = []
-
-      if (res.length > 0) {
-        res.map(async i => {
-
-          await ParticipanteEntity.findOne({
-            where: { id: i.idParticipante }
-          })
-          .then(res => {
-            const obj = {
-              id: i.id,
-              nome: res.nome,
-              sorteios: res.sorteios
-            }
-
-            data.push(obj)
-          })
-          .catch(res => {
-            response.status = 500
-            response.message = 'SorteioService:: Erro buscar o nome dos participante'
-            response.data = err
-          })  
-
-        })
-      }
-      
-      response.data = data
+      response.data = res
     })
     .catch(err => {
       response.status = 500
@@ -46,7 +19,39 @@ module.exports = app => () => {
       response.data = err
     })
 
-    return response
+    const promises = []
+      
+    if (response.data !== null && response.data.length > 0) {
+      response.data.map(i => {
+        const item = i.dataValues
+        const ret = getNomeParticipante(item)
+
+        console.log('ret: ', ret)
+
+        promises.push(ret)
+      })
+
+      await Promise.all(promises).then(res => response.data = res)
+
+      return response
+    } else {
+      return response
+    }
+  }
+
+  const getNomeParticipante = async sorteio => {
+    const obj = await ParticipanteEntity.findOne({
+      where: { id: sorteio.idParticipante }
+    })
+
+    const ret = {
+      id: sorteio.id,
+      data: sorteio.data,
+      sorteios: obj.dataValues.sorteios,
+      nome: obj.dataValues.nome
+    }
+
+    return ret
   }
 
   const sortear = async () => {
