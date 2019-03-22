@@ -69,7 +69,7 @@ module.exports = app => () => {
     if (sorteado == null) {
       
       response.status = 403
-      response.message = 'SorteioService:: Não foram encontrados participantes para sortear'
+      response.message = 'Não foram encontrados participantes para sortear'
       response.data = null
 
       return response
