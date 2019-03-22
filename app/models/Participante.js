@@ -3,7 +3,8 @@ const Participante = () => ({
   nome: '',
   login: '',
   senha: '',
-  sorteios: 0
+  sorteios: 0,
+  status: true
 })
 
 module.exports = () => Participante
