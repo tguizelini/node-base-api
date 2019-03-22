@@ -5,7 +5,10 @@ module.exports = app => () => {
 
   const list = async () => {
     await ParticipanteEntity.findAll({
-      order: [ ['id', 'ASC'] ]
+      order: [ ['id', 'ASC'] ],
+      where: {
+        status: true
+      }
     })
     .then(res => {
       response.status = 200
@@ -64,9 +67,10 @@ module.exports = app => () => {
   }
   
   const deleteById = async id => {
-    await ParticipanteEntity.destroy({ 
-      where: { id: id }
-    })
+    await ParticipanteEntity.update(
+      { status: false },
+      { where: { id: id } }
+    )
     .then(res => {
       response.status = 200
       response.message = 'Sucesso'

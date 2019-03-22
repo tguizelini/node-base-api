@@ -23,6 +23,11 @@ module.exports = app => () => {
     sorteios: {
       type: Sequelize.INTEGER,
       defaults: 0
+    },
+    status: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaults: true
     }
   })  
 
