@@ -1,4 +1,4 @@
-module.exports = app => () => {
+module.exports = app => () => { 
   const ParticipanteEntity = app.entities.Participante()
 
   const response = app.models.Response()

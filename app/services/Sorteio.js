@@ -56,7 +56,8 @@ module.exports = app => () => {
     let sorteado = null 
     
     await ParticipanteEntity.findOne({
-      order: [ ['sorteios', 'ASC'] ]
+      order: [ ['sorteios', 'ASC'] ],
+      where: { status: true }
     })
     .then(res => sorteado = res)
     .catch(err => {
