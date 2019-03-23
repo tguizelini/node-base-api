@@ -2,8 +2,6 @@ module.exports = app => () => {
   const service = app.services.Participante()
 
   const list = async (req, res) => {
-    const response = app.models.Response()
-
     const ret = await service.list()
     res.status(ret.status).json(ret)
   }
@@ -17,11 +15,11 @@ module.exports = app => () => {
       response.message = 'O campo ID é obrigatório'
       response.data = req.body
 
-      res.status(response.status).json(response)
+      res.status(200).json(response)
     }
     
     const ret = await service.find(id)
-    res.status(ret.status).json(ret)
+    res.status(200).json(ret)
   }
 
   const save = async (req, res) => {
@@ -32,7 +30,7 @@ module.exports = app => () => {
       response.message = 'O campo NOME é obrigatório'
       response.data = req.body
 
-      res.status(response.status).json(response)
+      res.status(200).json(response)
     }
 
     if (!req.body.login) {
@@ -40,7 +38,7 @@ module.exports = app => () => {
       response.message = 'O campo LOGIN é obrigatório'
       response.data = req.body
 
-      res.status(response.status).json(response)
+      res.status(200).json(response)
     }
 
     if (!req.body.senha) {
@@ -48,7 +46,7 @@ module.exports = app => () => {
       response.message = 'O campo SENHA é obrigatório'
       response.data = req.body
 
-      res.status(response.status).json(response)
+      res.status(200).json(response)
     }
 
     const model = app.models.Participante()
@@ -59,7 +57,7 @@ module.exports = app => () => {
 
     const ret = await service.save(model)
 
-    res.status(ret.status).json(ret)
+    res.status(200).json(ret)
   }
 
   const deleteById = async (req, res) => {
@@ -72,11 +70,11 @@ module.exports = app => () => {
       response.message = 'O campo nome ID é obrigatório'
       response.data = req.body
 
-      res.status(response.status).json(response)
+      res.status(200).json(response)
     }
 
     const ret = await service.deleteById(id)
-    res.status(ret.status).json(ret)
+    res.status(200).json(ret)
   }
 
   return {

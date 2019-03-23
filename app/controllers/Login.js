@@ -3,7 +3,7 @@ module.exports = app => () => {
 
   const login = async (req, res) => {
     const ret = await service.login(req.params.login, req.params.senha)
-    res.status(ret.status).json(ret)
+    res.status(200).json(ret)
   }
 
   return {
