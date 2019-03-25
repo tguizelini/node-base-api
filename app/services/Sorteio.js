@@ -1,4 +1,5 @@
 module.exports = app => () => {
+  const Sequelize = require('sequelize')
   const ParticipanteEntity = app.entities.Participante()
   const SorteioEntity = app.entities.Sorteio()
 
