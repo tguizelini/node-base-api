@@ -56,7 +56,10 @@ module.exports = app => () => {
     let sorteado = null 
     
     await ParticipanteEntity.findOne({
-      order: [ ['sorteios', 'ASC'], 'random()' ],
+      order: [ 
+        ['sorteios', 'ASC'], 
+        Sequelize.fn( 'RAND' ),
+      ],
       where: { status: true }
     })
     .then(res => sorteado = res)
