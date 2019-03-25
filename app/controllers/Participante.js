@@ -3,7 +3,7 @@ module.exports = app => () => {
 
   const list = async (req, res) => {
     const ret = await service.list()
-    res.status(ret.status).json(ret)
+    res.status(200).json(ret)
   }
 
   const find = async (req, res) => {
