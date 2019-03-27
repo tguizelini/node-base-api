@@ -79,6 +79,12 @@ module.exports = app => () => {
       return response
     } 
 
+    const response = await atualizaSorteiosDoParticipante(sorteado)
+  }
+
+  const atualizaSorteiosDoParticipante = async sorteado => {
+    const responseSorteio = app.mode.Response()
+
     await ParticipanteEntity.update(
       { sorteios: sorteado.sorteios + 1 },
       { where: { id: sorteado.id } }
@@ -87,25 +93,15 @@ module.exports = app => () => {
       const novoSorteio = app.models.Sorteio()
       novoSorteio.idParticipante = sorteado.id
 
-      await SorteioEntity.create(novoSorteio)
-      .then(resp => {
-        response.status = 200
-        response.message = 'Sucesso'
-        response.data = resp
-      })
-      .catch(err => {
-        response.status = 500
-        response.message = 'SorteioService:: Erro ao inserrir novo sorteio'
-        response.data = err
-      })
+      responseSorteio = await addSorteio(novoSorteio)
     })
     .catch(err => {
-      response.status = 500
-      response.message = 'SorteioService:: Erro ao atualizar número de sorteios do participante'
-      response.data = err
+      responseSorteio.status = 500
+      responseSorteio.message = 'SorteioService:: Erro ao atualizar número de sorteios do participante'
+      responseSorteio.data = err
     })
 
-    return response
+    return responseSorteio
   }
 
   const addSorteio = async obj => {

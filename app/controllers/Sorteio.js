@@ -31,7 +31,7 @@ module.exports = app => () => {
     }
 
     const obj = {
-      data = req.body.data,
+      data: req.body.data,
       idParticipante: req.body.idParticipante  
     }
 
