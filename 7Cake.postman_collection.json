@@ -81,7 +81,7 @@
 			"response": []
 		},
 		{
-			"name": "Add Sorteio",
+			"name": "Sorteio - Add Sorteio",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -112,7 +112,7 @@
 			"response": []
 		},
 		{
-			"name": "Apagar Sorteios ALL",
+			"name": "Sorteio - Apagar Todos",
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -137,7 +137,7 @@
 			"response": []
 		},
 		{
-			"name": "Apagar Sorteio por ID",
+			"name": "Sorteio - Apagar por ID",
 			"request": {
 				"method": "DELETE",
 				"header": [],
