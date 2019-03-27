@@ -107,9 +107,65 @@ module.exports = app => () => {
 
     return response
   }
+
+  const addSorteio = async obj => {
+    await SorteioEntity.create(obj)
+    .then(resp => {
+      response.status = 200
+      response.message = 'Sucesso'
+      response.data = resp
+    })
+    .catch(err => {
+      response.status = 500
+      response.message = 'SorteioService:: Erro ao inserir novo sorteio'
+      response.data = err
+    })
+
+    return response
+  }
+
+  const deleteById = async id => {
+    await SorteioEntity.destroy({
+      where: { id: id }
+    })
+    .then(res => {
+      response.status = 200
+      response.message = 'Sucesso'
+      response.data = res
+    })
+    .catch(err => {
+      esponse.status = 500
+      response.message = 'SorteioService:: Erro ao excluir sorteio por ID'
+      response.data = err
+    })
+
+    return response
+  }
+
+  const deleteAll = async () => {
+    await SorteioEntity.destroy({
+      where: {},
+      truncate: true
+    })
+    .then(resp => {
+      response.status = 200
+      response.message = 'Sucesso'
+      response.data = resp
+    })
+    .catch(err => {
+      response.status = 500
+      response.message = 'SorteioService:: Erro ao excluir todos os sorteios'
+      response.data = err
+    })
+
+    return response
+  }
   
   return {
     list,
-    sortear
+    sortear,
+    addSorteio,
+    deleteAll,
+    deleteById
   }
 }

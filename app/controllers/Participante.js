@@ -22,6 +22,21 @@ module.exports = app => () => {
     res.status(200).json(ret)
   }
 
+  const incrementSorteio = async (req, res) => {
+    const response = app.models.Response()
+
+    if (!req.body.idParticipante) {
+      response.status = 400
+      response.message = 'O campo "idParticipante" é obrigatório'
+      response.data = req.body
+
+      res.status(200).json(response)
+    }
+
+    const ret = await service.incrementSorteio(req.body.idParticipante)
+    res.status(200).json(ret)
+  }
+
   const save = async (req, res) => {
     const response = app.models.Response()
 
@@ -80,6 +95,7 @@ module.exports = app => () => {
   return {
     list,
     find,
+    incrementSorteio,
     save,
     deleteById
   }

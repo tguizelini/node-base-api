@@ -41,6 +41,27 @@ module.exports = app => () => {
 
     return response
   }
+
+  const incrementSorteio = async id => {
+    const participante = await ParticipanteEntity.findOne({ where: { id: id } })
+
+    await ParticipanteEntity.update(
+      { sorteios: participante.sorteios + 1 },
+      { where: { id: id } }
+    )
+    .then(res => {
+      response.status = 200
+      response.message = 'Sucesso'
+      response.data = res
+    })
+    .catch(err => {
+      response.status = 500
+      response.message = 'ParticipanteService:: Erro ao incrementar sorteio do participante'
+      response.data = err
+    })
+
+    return response
+  }
   
   const save = async obj => {
     if (!obj) {
@@ -88,6 +109,7 @@ module.exports = app => () => {
   return {
     list,
     find,
+    incrementSorteio,
     save,
     deleteById
   }

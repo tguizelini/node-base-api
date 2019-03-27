@@ -1,12 +1,38 @@
 {
 	"info": {
-		"_postman_id": "6630cb38-052d-4bbe-938c-c98423b5cc8b",
+		"_postman_id": "bb67832e-3a88-40d9-9045-9f6b39fabad2",
 		"name": "7Cake",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "GET Sorteio - Listar",
+			"name": "Login",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://api-7cake.herokuapp.com/login/guizelini/123",
+					"protocol": "https",
+					"host": [
+						"api-7cake",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"login",
+						"guizelini",
+						"123"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sorteio - Listar",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -30,7 +56,162 @@
 			"response": []
 		},
 		{
-			"name": "POST Participante - Criar",
+			"name": "Sorteio - Sortear",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://api-7cake.herokuapp.com/sorteios/next",
+					"protocol": "https",
+					"host": [
+						"api-7cake",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"sorteios",
+						"next"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Sorteio",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"data\": \"27/03/2019\",\n\t\"idParticipante\": 1\n}"
+				},
+				"url": {
+					"raw": "https://api-7cake.herokuapp.com/sorteios",
+					"protocol": "https",
+					"host": [
+						"api-7cake",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"sorteios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Apagar Sorteios ALL",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://api-7cake.herokuapp.com/sorteios/limpar",
+					"protocol": "https",
+					"host": [
+						"api-7cake",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"sorteios",
+						"limpar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Apagar Sorteio por ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://api-7cake.herokuapp.com/sorteios/1",
+					"protocol": "https",
+					"host": [
+						"api-7cake",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"sorteios",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Participantes - Listar",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://api-7cake.herokuapp.com/participantes",
+					"protocol": "https",
+					"host": [
+						"api-7cake",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"participantes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Participantes Por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://api-7cake.herokuapp.com/participantes/1",
+					"protocol": "https",
+					"host": [
+						"api-7cake",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"participantes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Participante - Criar",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -61,16 +242,23 @@
 			"response": []
 		},
 		{
-			"name": "GET Login",
+			"name": "Participante - Incrementa Sorteio",
 			"request": {
-				"method": "GET",
-				"header": [],
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": ""
+					"raw": "{\n\t\"idParticipante\": 1\n}"
 				},
 				"url": {
-					"raw": "https://api-7cake.herokuapp.com/login/guizelini/123",
+					"raw": "https://api-7cake.herokuapp.com/participantes/acrescenta-sorteio",
 					"protocol": "https",
 					"host": [
 						"api-7cake",
@@ -78,16 +266,15 @@
 						"com"
 					],
 					"path": [
-						"login",
-						"guizelini",
-						"123"
+						"participantes",
+						"acrescenta-sorteio"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "DELETE Participante - ByID",
+			"name": "Participante - ByID",
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -106,55 +293,6 @@
 					"path": [
 						"participantes",
 						"2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET Sorteio - Sortear",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "https://api-7cake.herokuapp.com/sorteios/next",
-					"protocol": "https",
-					"host": [
-						"api-7cake",
-						"herokuapp",
-						"com"
-					],
-					"path": [
-						"sorteios",
-						"next"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET Participantes - Listar ",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "https://api-7cake.herokuapp.com/participantes",
-					"protocol": "https",
-					"host": [
-						"api-7cake",
-						"herokuapp",
-						"com"
-					],
-					"path": [
-						"participantes"
 					]
 				}
 			},
