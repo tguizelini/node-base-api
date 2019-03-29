@@ -26,7 +26,7 @@ module.exports = () => {
     .catch(err => console.error('Database: Unable to connect to the database:', err))
 
   app.sequelize
-    .sync({ force: false }) 
+    .sync({ force: false })   
     .then(() => console.log(`DATABASE: Tables created!`))
 
   return app
