@@ -40,10 +40,8 @@ module.exports = app => () => {
   }
 
   const deleteById = async (req, res) => {
-    const response = app.models.Response()
-    
-
-    const ret = await service.deleteById(req.param.id)
+    //const response = app.models.Response()
+    const ret = await service.deleteById(3)
     res.status(200).json(ret)
   }
 

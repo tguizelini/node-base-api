@@ -135,7 +135,7 @@ module.exports = app => () => {
       response.data = res
     })
     .catch(err => {
-      esponse.status = 500
+      response.status = 500
       response.message = 'SorteioService:: Erro ao excluir sorteio por ID'
       response.data = err
     })
