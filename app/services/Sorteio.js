@@ -80,7 +80,7 @@ module.exports = app => () => {
       return response
     } 
 
-    const response = await atualizaSorteiosDoParticipante(sorteado)
+    response = await atualizaSorteiosDoParticipante(sorteado)
   }
 
   const atualizaSorteiosDoParticipante = async sorteado => {
@@ -145,7 +145,7 @@ module.exports = app => () => {
 
   const deleteAll = async () => {
     const response = app.models.Response()
-    
+
     await SorteioEntity.destroy({
       where: {},
       truncate: true
