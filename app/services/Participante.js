@@ -28,7 +28,9 @@ module.exports = app => () => {
     const response = app.models.Response()
 
     ParticipanteEntity.update(
-      { sorteio: 0 }
+      { sorteio: 0 },
+      { where: { sorteios: { isAfter: 0 } }
+      }
     )
     .then(res => {
       response.status = 200
