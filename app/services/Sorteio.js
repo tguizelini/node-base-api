@@ -54,7 +54,7 @@ module.exports = app => () => {
   }
 
   const sortear = async () => {
-    const response = app.models.Response()
+    let response = app.models.Response()
     let sorteado = null 
     
     await ParticipanteEntity.findOne({
