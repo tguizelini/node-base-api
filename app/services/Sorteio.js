@@ -3,9 +3,9 @@ module.exports = app => () => {
   const ParticipanteEntity = app.entities.Participante()
   const SorteioEntity = app.entities.Sorteio()
 
-  const response = app.models.Response()
-
   const list = async () => {
+    const response = app.models.Response()
+
     await SorteioEntity.findAll({
       order: [ ['id', 'DESC'] ]
     })
@@ -54,6 +54,7 @@ module.exports = app => () => {
   }
 
   const sortear = async () => {
+    const response = app.models.Response()
     let sorteado = null 
     
     await ParticipanteEntity.findOne({
@@ -105,6 +106,8 @@ module.exports = app => () => {
   }
 
   const addSorteio = async obj => {
+    const response = app.models.Response()
+
     await SorteioEntity.create(obj)
     .then(resp => {
       response.status = 200
@@ -121,6 +124,8 @@ module.exports = app => () => {
   }
 
   const deleteById = async id => {
+    const response = app.models.Response()
+
     await SorteioEntity.destroy({
       where: { id: id }
     })
@@ -139,6 +144,8 @@ module.exports = app => () => {
   }
 
   const deleteAll = async () => {
+    const response = app.models.Response()
+    
     await SorteioEntity.destroy({
       where: {},
       truncate: true
