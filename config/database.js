@@ -17,7 +17,7 @@ if (ENV == 'PROD') {
       },
       define: {
         timestamps: true,
-        underscored: true,
+        underscored: true, 
         freezeTableName: false,
         charset: 'utf8',
         dialectOptions: {
