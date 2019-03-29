@@ -84,7 +84,7 @@ module.exports = app => () => {
   }
 
   const atualizaSorteiosDoParticipante = async sorteado => {
-    const responseSorteio = app.mode.Response()
+    const responseSorteio = app.models.Response()
 
     await ParticipanteEntity.update(
       { sorteios: sorteado.sorteios + 1 },
