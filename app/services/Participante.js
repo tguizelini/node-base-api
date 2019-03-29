@@ -27,9 +27,10 @@ module.exports = app => () => {
   const cleanSorteios = async () => {
     const response = app.models.Response()
 
-    ParticipanteEntity.update(
+    await ParticipanteEntity.update(
       { sorteios: 0 },
-      { where: { sorteios: { isAfter: 0 } }
+      { 
+        where: { sorteios: { gt: 0 } } 
       }
     )
     .then(res => {
