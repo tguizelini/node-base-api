@@ -1,3 +1,5 @@
+const { Op } = require('sequelize')
+
 module.exports = app => () => { 
   const ParticipanteEntity = app.entities.Participante()
 
@@ -30,7 +32,7 @@ module.exports = app => () => {
     await ParticipanteEntity.update(
       { sorteios: 0 },
       { 
-        where: { sorteios: { gt: 0 } } 
+        where: { sorteios: { [Op.gt]: 0 } } 
       }
     )
     .then(res => {
