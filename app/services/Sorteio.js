@@ -1,3 +1,5 @@
+const { Op } = require('sequelize')
+
 module.exports = app => () => {
   const Sequelize = require('sequelize')
   const ParticipanteEntity = app.entities.Participante()
@@ -147,7 +149,7 @@ module.exports = app => () => {
     const response = app.models.Response()
 
     await SorteioEntity.destroy({
-      where: {},
+      where: { id: { [Op.gt]: 0 }},
       truncate: true
     })
     .then(resp => {
