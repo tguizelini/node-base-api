@@ -6,6 +6,11 @@ module.exports = app => () => {
     res.status(200).json(ret)
   }
 
+  const cleanSorteios = async (req, res) => {
+    const ret = await service.cleanSorteios()
+    res.status(200).json(ret)
+  }
+
   const find = async (req, res) => {
     const response = app.models.Response()
     const id = req.params.id || ''
@@ -97,6 +102,7 @@ module.exports = app => () => {
     find,
     incrementSorteio,
     save,
-    deleteById
+    deleteById,
+    cleanSorteios
   }
 }

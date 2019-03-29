@@ -1,9 +1,9 @@
 module.exports = app => () => { 
   const ParticipanteEntity = app.entities.Participante()
 
-  const response = app.models.Response()
-
   const list = async () => {
+    const response = app.models.Response()
+
     await ParticipanteEntity.findAll({
       order: [ ['id', 'ASC'] ],
       where: {
@@ -24,7 +24,29 @@ module.exports = app => () => {
     return response
   }
 
+  const cleanSorteios = async () => {
+    const response = app.models.Response()
+
+    ParticipanteEntity.update({
+      where: {}
+    })
+    .then(res => {
+      response.status = 200
+      response.message = 'Sucesso'
+      response.data = res
+    })
+    .catch(err => {
+      response.status = 500
+      response.message = 'ParticipanteService:: Erro ao limpar sorteios'
+      response.data = err
+    })
+
+    return response
+  }
+
   const find = async id => {
+    const response = app.models.Response()
+
     await ParticipanteEntity.findAll({
       where: { id: id }
     })
@@ -43,6 +65,7 @@ module.exports = app => () => {
   }
 
   const incrementSorteio = async id => {
+    const response = app.models.Response()
     const participante = await ParticipanteEntity.findOne({ where: { id: id } })
 
     await ParticipanteEntity.update(
@@ -64,6 +87,8 @@ module.exports = app => () => {
   }
   
   const save = async obj => {
+    const response = app.models.Response()
+
     if (!obj) {
       response.status = 500
       response.message = 'ParticipanteService:: Erro buscar buscar participante por ID'
@@ -88,6 +113,8 @@ module.exports = app => () => {
   }
   
   const deleteById = async id => {
+    const response = app.models.Response()
+
     await ParticipanteEntity.update(
       { status: false },
       { where: { id: id } }
@@ -111,6 +138,7 @@ module.exports = app => () => {
     find,
     incrementSorteio,
     save,
-    deleteById
+    deleteById,
+    cleanSorteios
   }
 }
