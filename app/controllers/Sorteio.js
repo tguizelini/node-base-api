@@ -40,6 +40,8 @@ module.exports = app => () => {
   }
 
   const deleteById = async (req, res) => {
+    const response = app.models.Response()
+    
     if (!req.param.id) {
       response.status = 400
       response.message = 'O campo "id" é obrigatório'
