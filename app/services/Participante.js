@@ -27,9 +27,9 @@ module.exports = app => () => {
   const cleanSorteios = async () => {
     const response = app.models.Response()
 
-    ParticipanteEntity.update({
-      where: {}
-    })
+    ParticipanteEntity.update(
+      { sorteio: 0 }
+    )
     .then(res => {
       response.status = 200
       response.message = 'Sucesso'
