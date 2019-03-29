@@ -42,15 +42,8 @@ module.exports = app => () => {
   const deleteById = async (req, res) => {
     const response = app.models.Response()
     
-    if (!req.param.id) {
-      response.status = 400
-      response.message = 'O campo "id" é obrigatório'
-      response.data = req.body
 
-      res.status(200).json(response)
-    }
-
-    const ret = await service.deleteAll(req.param.id)
+    const ret = await service.deleteById(req.param.id)
     res.status(200).json(ret)
   }
 
