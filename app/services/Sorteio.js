@@ -149,8 +149,7 @@ module.exports = app => () => {
     const response = app.models.Response()
 
     await SorteioEntity.destroy({
-      where: { id: { [Op.gt]: 0 }},
-      truncate: true
+      where: { id: { [Op.gt]: 0 }}
     })
     .then(resp => {
       response.status = 200
