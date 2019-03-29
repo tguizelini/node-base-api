@@ -16,7 +16,7 @@ if (ENV == 'PROD') {
         idle: 10000
       },
       define: {
-        timestamps: true,
+        timestamps: false,
         underscored: true, 
         freezeTableName: false,
         charset: 'utf8',
