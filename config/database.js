@@ -2,11 +2,11 @@ const ENV = 'PROD'
 
 if (ENV == 'PROD') {
   module.exports = {
-    username: 'joeky497_tiago7',
-    password: '1234qwerty',
-    database: 'joeky497_7comm_bolo',
+    username: 'user_name',
+    password: 'password',
+    database: 'nome_do_seu_banco',
     options: {
-      host: '192.185.211.194',
+      host: '666.666.666.666',
       dialect: 'mysql',
       port: 3306,
       pool: {
